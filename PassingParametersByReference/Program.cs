@@ -10,43 +10,47 @@ namespace PassingParametersByReference
     {
         static void Main(string[] args)
         {
-           UsingValueParameters();
+           UsingRefParameters();
             Console.ReadLine();
         }
 
-        public static void UsingValueParameters ()
+        private static void UsingRefParameters()
         {
-            int monthlyWage1 = 1000;
-            int monthlyWage2 = 1500;
-            int monthlyWage3 = 1800;
-            int monthlyWage4 = 2000;
-            int monthlyWage5 = 2100;
-            int months = 12;
-            int bonus = 0;
+            int monthlyWage1 = 1234;
+            int monthlyWage2 = 2000;
+            int monthlyWage3 = 1900;
+            int monthlyWage4 = 2001;
 
+            int months1 = 12;
+            int months2 = 8;
+            int bonus = 300;
 
-            int yearlyWageForEmployee1 = CalculateYearlyWage(monthlyWage1, months, bonus);
-            Console.WriteLine($"\nValue Parameters Method: Monthly wage: {monthlyWage1}: Yearly wage for employee 1, includes bonus of 9 if >2000/month:{yearlyWageForEmployee1}***");
+            int yearlyWageForEmployee1ByRef = CalculateYearlyWageByRef(monthlyWage1, months1, ref bonus);
+            Console.WriteLine($"\nYearly wage for employee 1 (Bethany, 12 months):{yearlyWageForEmployee1ByRef}");
+            Console.WriteLine($"Employee1 recieved a bonus of {bonus}");
 
-            int yearlyWageForEmployee2 = CalculateYearlyWage(monthlyWage2, months, bonus);
-            Console.WriteLine($"\nValue Parameters Method: Monthly wage: {monthlyWage2}: Yearly wage for employee 2, includes bonus of 9 if >2000/month:{yearlyWageForEmployee2}***");
+            int yearlyWageForEmployee2ByRef = CalculateYearlyWageByRef(monthlyWage2, months2, ref bonus);
+            Console.WriteLine($"\nYearly wage for employee 2 (John, 8 months):{yearlyWageForEmployee2ByRef}");
+            Console.WriteLine($"Employee2 recieved a bonus of {bonus}");
 
-            int yearlyWageForEmployee3 = CalculateYearlyWage(monthlyWage3, months, bonus);
-            Console.WriteLine($"\nValue Parameters Method: Monthly wage: {monthlyWage3}: Yearly wage for employee 3, includes bonus of 9 if >2000/month:{yearlyWageForEmployee3}***");
+            //int yearlyWageForEmployee3ByRef = CalculateYearlyWageByRef(monthlyWage3, months1, ref bonus);
+            //Console.WriteLine($"\nYearly wage for employee 3 (Jaime, 12 months):{yearlyWageForEmployee3ByRef}");
+            //Console.WriteLine($"Employee3 recieved a bonus of {bonus}");
 
-            int yearlyWageForEmployee4 = CalculateYearlyWage(monthlyWage4, months, bonus);
-            Console.WriteLine($"\nValue Parameters Method: Monthly wage: {monthlyWage4}: Yearly wage for employee 4, includes bonus of 9 if >2000/month:{yearlyWageForEmployee4}***");
-
-            int yearlyWageForEmployee5 = CalculateYearlyWage(monthlyWage5, months, bonus);
-            Console.WriteLine($"\nValue Parameters Method: Monthly wage: {monthlyWage5}: Yearly wage for employee 5, includes bonus of 9 if >2000/month:{yearlyWageForEmployee5}***");
+            //int yearlyWageForEmployee4ByRef = CalculateYearlyWageByRef(monthlyWage4, months1, ref bonus);
+            //Console.WriteLine($"\nYearly wage for employee 4 (Mija, 12 months):{yearlyWageForEmployee4ByRef}");
+            //Console.WriteLine($"Employee4 recieved a bonus of {bonus}");
         }
 
-        public static int CalculateYearlyWage(int monthlyWage, int numberOfMonthsWorked, int bonus)
+        public static int CalculateYearlyWageByRef(int monthlyWage, int numberOfMonthsWorked, ref int bonus)
         {
             if (monthlyWage < 2000)
-                bonus = 9;
-
-            Console.WriteLine($"This 'CalculateYearlyWage' Method checks the bonus qualification: The yearly wage is : {monthlyWage * numberOfMonthsWorked + bonus}. The employee got a bonus of:{bonus} if salary was >2000/month***");
+            {
+                bonus *= 2;
+                Console.WriteLine("Bonus doubled, Yes!");
+            }
+               
+            Console.WriteLine($"The yearly wage is  {monthlyWage * numberOfMonthsWorked + bonus}");
             return monthlyWage * numberOfMonthsWorked + bonus;
         }
 
